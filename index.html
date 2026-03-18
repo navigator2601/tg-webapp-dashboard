@@ -1,1 +1,35 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TG WebApp Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Вітаємо у WebApp!</h1>
+            <p>Ваша панель керування</p>
+        </header>
 
+        <section class="clock-section">
+            <div id="clock">00:00:00</div>
+            <p>Поточний час</p>
+        </section>
+
+        <nav class="menu">
+            <button class="menu-btn" onclick="handleMenuClick('Головна')">🏠 Головна</button>
+            <button class="menu-btn" onclick="handleMenuClick('Годинник')">🕒 Годинник</button>
+            <button class="menu-btn" id="btn-weather" onclick="handleMenuClick('Погода')">🌤 Погода</button>
+            <button class="menu-btn" onclick="handleMenuClick('Налаштування')">⚙️ Налаштування</button>
+            <button class="menu-btn" onclick="handleMenuClick('Про додаток')">ℹ️ Про додаток</button>
+            <button class="menu-btn" onclick="handleMenuClick('Профіль')">👤 Профіль</button>
+        </nav>
+
+        <div id="status-message">Оберіть пункт меню...</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
