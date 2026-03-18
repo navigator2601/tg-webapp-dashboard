@@ -1,1 +1,74 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    color: #333;
+}
 
+.container {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    color: #248bcf; /* Колір Telegram */
+    margin-bottom: 5px;
+}
+
+header p {
+    color: #888;
+    margin-top: 0;
+}
+
+.clock-section {
+    background: #e7f3fb;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
+#clock {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #248bcf;
+}
+
+.menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.menu-btn {
+    background-color: #248bcf;
+    color: white;
+    border: none;
+    padding: 15px 10px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.menu-btn:active {
+    background-color: #1a6ba2;
+    transform: scale(0.98);
+}
+
+#status-message {
+    margin-top: 30px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-style: italic;
+    color: #555;
+}
