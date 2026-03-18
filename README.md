@@ -1,2 +1,19 @@
-# tg-webapp-dashboard
-tg-webapp-dashboard
+# TG WebApp Dashboard
+
+Цей репозиторій містить фронтенд веб-додатку для Telegram WebApp.  
+Андрій працює над дизайном, кнопками та базовими віджетами.
+
+## Структура проекту
+
+- `index.html` – головна сторінка веб-додатку  
+- `style.css` – стилі сторінки  
+- `script.js` – JavaScript для кнопок та віджетів  
+
+> Поки що боту та користувачів ми не підключаємо. Основна мета – зробити веб-інтерфейс.
+
+## Початок роботи
+
+1. Клонувати репозиторій:
+
+```bash
+git clone https://github.com/navigator2601/tg-webapp-dashboard.git
