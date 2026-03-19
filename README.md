@@ -88,4 +88,7 @@
 Погода: +18°C, ясно ☀️
 
 Приклад итого що має вийти
-https://github.com/navigator2601/tg-webapp-dashboard/blob/main/2026-03-19%2023-09-42.mp4
+<video width="320" height="240" controls>
+  <source src="https://github.com/navigator2601/tg-webapp-dashboard/raw/main/2026-03-19%2023-09-42.mp4" type="video/mp4">
+  Ваш браузер не підтримує відео.
+</video>
