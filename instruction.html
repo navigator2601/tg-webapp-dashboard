@@ -3,127 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Інструкція: GitHub Pages + Telegram Bot</title>
+    <title>WebApp Setup Guide</title>
+
     <style>
+        :root {
+            --bg: #020617;
+            --card: rgba(15,23,42,0.9);
+            --accent: #00eaff;
+            --accent-soft: rgba(0,234,255,0.2);
+            --text: #e6edf3;
+            --muted: #8b949e;
+        }
+
         body {
-            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-            background: #0d0d0d;
-            color: #e6edf3;
             margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #0b1220, #020617, #000);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
             padding: 20px;
         }
-        h1, h2 {
-            color: #00eaff;
-            text-shadow: 0 0 6px #00eaff;
+
+        h1 {
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent);
         }
+
         h2 {
             margin-top: 30px;
+            color: var(--accent);
         }
-        p {
-            line-height: 1.5;
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--accent-soft);
+            border-radius: 14px;
+            padding: 16px;
+            margin-top: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
+
         code {
-            background: #111;
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #00eaff;
-        }
-        pre {
-            background: #111;
-            padding: 10px;
+            background: #000;
+            padding: 3px 6px;
             border-radius: 6px;
-            overflow-x: auto;
-            color: #00eaff;
+            color: var(--accent);
         }
-        a {
-            color: #00eaff;
-            text-decoration: underline;
-        }
+
         .step {
-            background: rgba(0,234,255,0.05);
-            border: 1px solid rgba(0,234,255,0.3);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-        .note {
-            background: rgba(255,255,255,0.05);
-            border-left: 3px solid #00eaff;
-            padding: 10px;
             margin: 10px 0;
+        }
+
+        .ok {
+            color: #00ffcc;
+        }
+
+        .bad {
+            color: #ff5b5b;
+        }
+
+        button.copy {
+            margin-left: 10px;
+            background: none;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 2px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button.copy:hover {
+            background: var(--accent-soft);
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: var(--muted);
+            font-size: 13px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Інструкція: GitHub Pages + Telegram Bot</h1>
-    <p>Ця інструкція допоможе створити власний Telegram WebApp, використовуючи GitHub Pages. Всі кроки можна виконувати без серверу — сторінка буде працювати через GitHub Pages.</p>
+<div class="container">
 
-    <div class="step">
-        <h2>Крок 1: Підготовка репозиторію на GitHub</h2>
-        <p>1. Увійди у свій акаунт GitHub.</p>
-        <p>2. Створи новий репозиторій, наприклад: <code>my-webapp</code>.</p>
-        <p>3. Завантаж туди свої файли: <code>index.html</code>, <code>style.css</code>, <code>script.js</code>.</p>
-        <div class="note">Якщо файли вже є у репозиторії, переходь до наступного кроку.</div>
+    <h1>⚡ WebApp + Telegram Bot (без сервера)</h1>
+    <p>Це інструкція як запустити WebApp через GitHub Pages і підключити його до Telegram.</p>
+
+    <div class="card">
+        <h2>🔧 КРОК 1: GitHub Pages</h2>
+
+        <div class="step">1. Відкрити репозиторій</div>
+        <div class="step">2. Перейти: <code>Settings → Pages</code></div>
+        <div class="step">3. Обрати:
+            <ul>
+                <li><code>Branch: main</code></li>
+                <li><code>Folder: /root</code></li>
+            </ul>
+        </div>
+        <div class="step">4. Натиснути <b>Save</b></div>
+
+        <p>Після цього з’явиться посилання:</p>
+
+        <code id="url">https://username.github.io/repository-name/</code>
+        <button class="copy" onclick="copyText('url')">Copy</button>
+
+        <p class="ok">✔ Це і є твій WebApp</p>
     </div>
 
-    <div class="step">
-        <h2>Крок 2: Включення GitHub Pages</h2>
-        <p>1. Перейди у вкладку <strong>Settings</strong> свого репозиторію.</p>
-        <p>2. Знайди розділ <strong>Pages</strong> (або прокрути вниз).</p>
-        <p>3. У полі <strong>Source</strong> вибери <code>main branch</code> або <code>main branch /root</code> і натисни <strong>Save</strong>.</p>
-        <p>4. Після збереження побачиш посилання на GitHub Pages, наприклад: <a href="#" id="gh-pages-link">https://username.github.io/my-webapp/</a></p>
-        <div class="note">Це посилання буде використовуватися в Telegram Bot для відкриття сторінки.</div>
+    <div class="card">
+        <h2>🤖 КРОК 2: Telegram Bot</h2>
+
+        <div class="step">1. В Telegram знайти <b>@BotFather</b></div>
+        <div class="step">2. Ввести: <code>/newbot</code></div>
+        <div class="step">3. Придумати ім’я і username</div>
+
+        <p class="ok">✔ Бот створений</p>
     </div>
 
-    <div class="step">
-        <h2>Крок 3: Створення Telegram Bot</h2>
-        <p>1. Відкрий Telegram і знайди <strong>@BotFather</strong>.</p>
-        <p>2. Надішли команду <code>/newbot</code>.</p>
-        <p>3. Введи назву бота та username (username має закінчуватися на "bot").</p>
-        <p>4. BotFather надасть <strong>токен</strong> — збережи його, він потрібен для підключення бота.</p>
-        <div class="note">Це може бути тестовий бот, він не має залежати від твого основного проекту.</div>
+    <div class="card">
+        <h2>🔘 КРОК 3: Кнопка WebApp (БЕЗ КОДУ)</h2>
+
+        <div class="step">1. В BotFather:</div>
+        <code>/setmenubutton</code>
+
+        <div class="step">2. Обрати бота</div>
+
+        <div class="step">3. Текст кнопки:</div>
+        <code>Відкрити WebApp</code>
+
+        <div class="step">4. Вставити URL:</div>
+
+        <code id="url2">https://username.github.io/repository-name/</code>
+        <button class="copy" onclick="copyText('url2')">Copy</button>
+
+        <p class="ok">✔ Тепер кнопка відкриває сайт</p>
     </div>
 
-    <div class="step">
-        <h2>Крок 4: Підключення GitHub Pages до Telegram Bot</h2>
-        <p>1. В коді бота вкажи URL сторінки GitHub Pages як <strong>Web App URL</strong> або посилання для кнопки.</p>
-        <p>Приклад на Python (aiogram / pyTelegramBotAPI):</p>
-        <pre>
-from aiogram import Bot, Dispatcher, types
-from aiogram.utils import executor
+    <div class="card">
+        <h2>⚠️ ВАЖЛИВО</h2>
 
-TOKEN = "YOUR_BOT_TOKEN"
-bot = Bot(token=TOKEN)
-dp = Dispatcher(bot)
+        <p class="bad">❌ НЕ ПРАЦЮЄ:</p>
+        <code>github.com/.../blob/...</code><br>
+        <code>raw.githubusercontent.com/...</code>
 
-@dp.message_handler(commands=['start'])
-async def start(message: types.Message):
-    keyboard = types.InlineKeyboardMarkup()
-    keyboard.add(types.InlineKeyboardButton("Відкрити WebApp", url="https://username.github.io/my-webapp/"))
-    await message.answer("Привіт! Натисни кнопку нижче:", reply_markup=keyboard)
-
-if __name__ == "__main__":
-    executor.start_polling(dp)
-        </pre>
-        <div class="note">Для JavaScript бота структура буде аналогічною — важливо вказати URL GitHub Pages.</div>
+        <p class="ok">✔ ПРАЦЮЄ:</p>
+        <code>github.io</code>
     </div>
 
-    <div class="step">
-        <h2>Крок 5: Тестування</h2>
-        <p>1. Відкрий Telegram і напиши боту <code>/start</code>.</p>
-        <p>2. Натисни кнопку “Відкрити WebApp”.</p>
-        <p>3. Повинна відкритись твоя сторінка з GitHub Pages, і всі стилі та скрипти мають працювати.</p>
-    </div>
-
-    <div class="step">
-        <h2>Поради</h2>
+    <div class="card">
+        <h2>🚀 РЕЗУЛЬТАТ</h2>
         <ul>
-            <li>Всі зміни у файлах <code>index.html</code>, <code>style.css</code>, <code>script.js</code> автоматично оновлюються на GitHub Pages після пушу.</li>
-            <li>Тестуй сторінку в браузері перед підключенням до бота.</li>
-            <li>Якщо бот не відкриває сторінку, перевір URL і права доступу репозиторію (Public).</li>
+            <li>Відкриваєш бота</li>
+            <li>Натискаєш кнопку</li>
+            <li>Відкривається WebApp</li>
         </ul>
     </div>
+
+    <div class="footer">
+        Refridex Training Module • WebApp Level 1
+    </div>
+
+</div>
+
+<script>
+function copyText(id) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text);
+    alert("Скопійовано!");
+}
+</script>
 
 </body>
 </html>
