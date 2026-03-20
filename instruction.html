@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інструкція: GitHub Pages + Telegram Bot</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+            background: #0d0d0d;
+            color: #e6edf3;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #00eaff;
+            text-shadow: 0 0 6px #00eaff;
+        }
+        h2 {
+            margin-top: 30px;
+        }
+        p {
+            line-height: 1.5;
+        }
+        code {
+            background: #111;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #00eaff;
+        }
+        pre {
+            background: #111;
+            padding: 10px;
+            border-radius: 6px;
+            overflow-x: auto;
+            color: #00eaff;
+        }
+        a {
+            color: #00eaff;
+            text-decoration: underline;
+        }
+        .step {
+            background: rgba(0,234,255,0.05);
+            border: 1px solid rgba(0,234,255,0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .note {
+            background: rgba(255,255,255,0.05);
+            border-left: 3px solid #00eaff;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Інструкція: GitHub Pages + Telegram Bot</h1>
+    <p>Ця інструкція допоможе створити власний Telegram WebApp, використовуючи GitHub Pages. Всі кроки можна виконувати без серверу — сторінка буде працювати через GitHub Pages.</p>
+
+    <div class="step">
+        <h2>Крок 1: Підготовка репозиторію на GitHub</h2>
+        <p>1. Увійди у свій акаунт GitHub.</p>
+        <p>2. Створи новий репозиторій, наприклад: <code>my-webapp</code>.</p>
+        <p>3. Завантаж туди свої файли: <code>index.html</code>, <code>style.css</code>, <code>script.js</code>.</p>
+        <div class="note">Якщо файли вже є у репозиторії, переходь до наступного кроку.</div>
+    </div>
+
+    <div class="step">
+        <h2>Крок 2: Включення GitHub Pages</h2>
+        <p>1. Перейди у вкладку <strong>Settings</strong> свого репозиторію.</p>
+        <p>2. Знайди розділ <strong>Pages</strong> (або прокрути вниз).</p>
+        <p>3. У полі <strong>Source</strong> вибери <code>main branch</code> або <code>main branch /root</code> і натисни <strong>Save</strong>.</p>
+        <p>4. Після збереження побачиш посилання на GitHub Pages, наприклад: <a href="#" id="gh-pages-link">https://username.github.io/my-webapp/</a></p>
+        <div class="note">Це посилання буде використовуватися в Telegram Bot для відкриття сторінки.</div>
+    </div>
+
+    <div class="step">
+        <h2>Крок 3: Створення Telegram Bot</h2>
+        <p>1. Відкрий Telegram і знайди <strong>@BotFather</strong>.</p>
+        <p>2. Надішли команду <code>/newbot</code>.</p>
+        <p>3. Введи назву бота та username (username має закінчуватися на "bot").</p>
+        <p>4. BotFather надасть <strong>токен</strong> — збережи його, він потрібен для підключення бота.</p>
+        <div class="note">Це може бути тестовий бот, він не має залежати від твого основного проекту.</div>
+    </div>
+
+    <div class="step">
+        <h2>Крок 4: Підключення GitHub Pages до Telegram Bot</h2>
+        <p>1. В коді бота вкажи URL сторінки GitHub Pages як <strong>Web App URL</strong> або посилання для кнопки.</p>
+        <p>Приклад на Python (aiogram / pyTelegramBotAPI):</p>
+        <pre>
+from aiogram import Bot, Dispatcher, types
+from aiogram.utils import executor
+
+TOKEN = "YOUR_BOT_TOKEN"
+bot = Bot(token=TOKEN)
+dp = Dispatcher(bot)
+
+@dp.message_handler(commands=['start'])
+async def start(message: types.Message):
+    keyboard = types.InlineKeyboardMarkup()
+    keyboard.add(types.InlineKeyboardButton("Відкрити WebApp", url="https://username.github.io/my-webapp/"))
+    await message.answer("Привіт! Натисни кнопку нижче:", reply_markup=keyboard)
+
+if __name__ == "__main__":
+    executor.start_polling(dp)
+        </pre>
+        <div class="note">Для JavaScript бота структура буде аналогічною — важливо вказати URL GitHub Pages.</div>
+    </div>
+
+    <div class="step">
+        <h2>Крок 5: Тестування</h2>
+        <p>1. Відкрий Telegram і напиши боту <code>/start</code>.</p>
+        <p>2. Натисни кнопку “Відкрити WebApp”.</p>
+        <p>3. Повинна відкритись твоя сторінка з GitHub Pages, і всі стилі та скрипти мають працювати.</p>
+    </div>
+
+    <div class="step">
+        <h2>Поради</h2>
+        <ul>
+            <li>Всі зміни у файлах <code>index.html</code>, <code>style.css</code>, <code>script.js</code> автоматично оновлюються на GitHub Pages після пушу.</li>
+            <li>Тестуй сторінку в браузері перед підключенням до бота.</li>
+            <li>Якщо бот не відкриває сторінку, перевір URL і права доступу репозиторію (Public).</li>
+        </ul>
+    </div>
+
+</body>
+</html>
